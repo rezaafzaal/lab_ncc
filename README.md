@@ -41,32 +41,6 @@ Sudah bisa diakses dsecara publik
 
 ## Penjelasan Proses Build dan Run Docker
 
-Aplikasi dikemas menggunakan Docker dengan langkah sebagai berikut:
-
-### 1. Build Image
-
-```bash
-docker compose build
-```
-
-### 2. Menjalankan Container
-
-```bash
-docker compose up -d
-```
-
-### Penjelasan:
-
-- Dockerfile menggunakan **multi-stage build** untuk optimasi ukuran image
-- Base image menggunakan **node:20-alpine** agar ringan
-- Container menjalankan aplikasi pada port `3000`
-- Menggunakan **restart policy** agar container tetap berjalan
-- Menggunakan **HEALTHCHECK** untuk memonitor kondisi service
-
----
-
-## Penjelasan Proses Build dan Run Docker
-
 Command:
 
 ```bash
@@ -85,8 +59,45 @@ http://172.188.96.166:3000/health
 - Menghubungkan port 3000 dari container ke host
 - Mengaktifkan restart policy (unless-stopped)
 
+---
+## Penjelasan Proses Deployment ke VPS
+
+Deployment dilakukan menggunakan Virtual Machine berbasis Linux (Ubuntu) di cloud.
+
+### Langkah-langkah:
+
+### 1. Membuat VPS
+
+Membuat Virtual Machine menggunakan platform cloud (Microsoft Azure) dengan sistem operasi Ubuntu.
+
+### 2. Mengakses VPS menggunakan SSH
+
+### 3. Menyalin Project dari Local ke VPS
+
+Project yang sudah dibuat di local (WSL/laptop) dikirim ke VPS menggunakan perintah `scp`:
+
+### 4. Menjalankan Aplikasi di VPS
+
+```bash
+cd tugas1_ncc
+docker compose up -d --build
+```
+
+
+### 5. Membuka Port 3000
+
+Port 3000 dibuka melalui pengaturan firewall.
+
+
+### 6. Akses Endpoint Publik
+
+Setelah semua langkah selesai, endpoint dapat diakses melalui browser:
+
+```bash
+http://172.188.96.166:3000/health
+```
+
 ## Kendala yang Dihadapi
 
-Mencari VPS yang gratis
+Mencari VPS yang gratis karena kemarin lbe ncc sudah pake azure
 
----
