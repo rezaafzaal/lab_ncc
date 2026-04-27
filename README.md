@@ -3,8 +3,6 @@ tes webhook lagi
 # CI/CD Pipeline dengan Jenkins & SonarQube
 
 [![Build Status](https://problem-citation-renewably.ngrok-free.dev/buildStatus/icon?job=ncc)](https://problem-citation-renewably.ngrok-free.dev/job/ncc)
-[![Quality Gate Status](http://localhost:9000/api/project_badges/measure?project=ncc&metric=alert_status)](http://localhost:9000/dashboard?id=ncc)
-[![Coverage](http://localhost:9000/api/project_badges/measure?project=ncc&metric=coverage)](http://localhost:9000/dashboard?id=ncc)
 
 ---
 
