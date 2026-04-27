@@ -1,6 +1,6 @@
 tes webhook lagi
 
-# 🚀 NCC — CI/CD Pipeline dengan Jenkins & SonarQube
+# CI/CD Pipeline dengan Jenkins & SonarQube
 
 [![Build Status](https://problem-citation-renewably.ngrok-free.dev/buildStatus/icon?job=ncc)](https://problem-citation-renewably.ngrok-free.dev/job/ncc)
 [![Quality Gate Status](http://localhost:9000/api/project_badges/measure?project=ncc&metric=alert_status)](http://localhost:9000/dashboard?id=ncc)
@@ -8,13 +8,13 @@ tes webhook lagi
 
 ---
 
-## 📋 Deskripsi
+## Deskripsi
 
 Project ini merupakan implementasi **CI/CD Pipeline** menggunakan **Jenkins** dan **SonarQube** yang berjalan di lingkungan Docker lokal. Pipeline dirancang untuk mengotomatiskan proses build, testing, analisis kualitas kode, hingga quality gate enforcement secara penuh.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Tool                      | Fungsi                                     |
 | ------------------------- | ------------------------------------------ |
@@ -29,7 +29,7 @@ Project ini merupakan implementasi **CI/CD Pipeline** menggunakan **Jenkins** da
 
 ---
 
-## 📁 Struktur Project
+## Struktur Project
 
 ```
 ncc/
@@ -48,51 +48,38 @@ ncc/
 
 ---
 
-## ⚙️ Alur Pipeline
+## Alur Pipeline
 
-```
-Git Push
-   ↓
-GitHub Webhook → Jenkins
-   ↓
-┌─────────────────────────────────────┐
-│  Stage 1: Checkout                  │
-│  Stage 2: Build (npm install)       │
-│  Stage 3: Quality Checks (PARALLEL) │
-│     ├── Lint (ESLint)               │
-│     └── Test (Jest + Coverage)      │
-│  Stage 4: SonarQube Analysis        │
-│  Stage 5: Quality Gate              │
-│     ├── PASSED → ✅ SUCCESS         │
-│     └── FAILED → ❌ ABORT           │
-│  Post:    Cleanup Workspace         │
-└─────────────────────────────────────┘
-```
+Pertama, Jenkins mengambil source code terbaru dari repository (checkout).
+Setelah itu masuk ke tahap build, di mana dependency project di-install menggunakan npm.
+
+Selanjutnya dilakukan pengecekan kualitas code. Di tahap ini ada dua proses yang berjalan bersamaan: linting untuk memastikan code sesuai standar, dan testing untuk memastikan program berjalan dengan benar serta menghasilkan coverage.
+
+Kalau semua lolos, pipeline lanjut ke analisis menggunakan SonarQube untuk mengecek kualitas code secara lebih mendalam.
+Hasil analisis ini kemudian dicek lewat Quality Gate. Jika standar kualitas terpenuhi, pipeline dinyatakan berhasil. Kalau tidak, pipeline akan dihentikan.
+
+Di akhir proses, Jenkins membersihkan workspace agar tidak ada file sisa dari build sebelumnya.
 
 ---
 
-## ✅ Fitur yang Diimplementasikan
+## Fitur yang Diimplementasikan
 
-- [x] Jenkins Pipeline (Declarative Jenkinsfile)
-- [x] Stage terstruktur: build → test → analyze
-- [x] SonarQube Quality Gate — pipeline **FAIL** jika kualitas tidak lolos
-- [x] Webhook — auto trigger pada setiap `git push`
-- [x] Environment variables & credentials management
-- [x] Build status badge
-- [x] Optimasi pipeline — **parallel stage** (Lint + Test)
+- Jenkins Pipeline (Declarative Jenkinsfile)
+- Stage terstruktur: build → test → analyze
+- SonarQube Quality Gate — pipeline **FAIL** jika kualitas tidak lolos
+- Webhook — auto trigger pada setiap `git push`
+- Environment variables & credentials management
+- Build status badge
+- Optimasi pipeline — **parallel stage** (Lint + Test)
 
 ---
 
-## 📊 Hasil SonarQube
+## Hasil SonarQube
 
-| Metrik          | Hasil         |
-| --------------- | ------------- |
-| Quality Gate    | ✅ **Passed** |
-| Coverage        | 91.3%         |
-| Test Suites     | 2 passed      |
-| Total Tests     | 12 passed     |
-| Bugs            | 0             |
-| Vulnerabilities | 0             |
+<img width="1819" height="822" alt="image" src="https://github.com/user-attachments/assets/7cdcc963-f351-4ae5-b4df-99bb995b2f99" />
+
+
+Hasil analisis SonarQube menunjukkan Quality Gate Passed dengan Security, Reliability, dan Maintainability grade A. Coverage mencapai 89.3% dari total 22 lines yang dianalisis.
 
 ---
 
@@ -143,10 +130,10 @@ npm start
 
 ## 📝 Konfigurasi Jenkins
 
-1. **Plugin yang diperlukan:** SonarQube Scanner, Pipeline, Git, HTML Publisher, Embeddable Build Status, Workspace Cleanup
+1. **Plugin yang diperlukan:** SonarQube Scanner, Pipeline, Git, Embeddable Build Status, Workspace Cleanup
 2. **Credentials:** Token SonarQube disimpan sebagai `Secret Text` dengan ID `sonarqube-token`
-3. **SonarQube Server:** Nama server harus `SonarQube` (sesuai `withSonarQubeEnv('SonarQube')`)
-4. **Webhook SonarQube → Jenkins:** `http://[IP_Jenkins]:8080/sonarqube-webhook/`
+3. **SonarQube Server:** Nama server harus `SonarQube`
+4. **Webhook SonarQube → Jenkins:** `http://172.20.0.2:8080/sonarqube-webhook/`
 
 ---
 
