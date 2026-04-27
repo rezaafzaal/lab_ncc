@@ -28,7 +28,7 @@ pipeline {
         // ---------------------------------------------------------
         stage('Checkout') {
             steps {
-                echo '📥 Checking out source code...'
+                echo 'Checking out source code...'
                 checkout scm
                 sh 'git log -1 --oneline'
             }
@@ -39,9 +39,9 @@ pipeline {
         // ---------------------------------------------------------
         stage('Build') {
             steps {
-                echo '🔨 Installing dependencies...'
+                echo 'Installing dependencies...'
                 sh 'npm install'
-                echo '✅ Dependencies installed.'
+                echo 'Dependencies installed.'
             }
         }
 
@@ -53,17 +53,17 @@ pipeline {
 
                 stage('Lint') {
                     steps {
-                        echo '🔍 Running ESLint...'
+                        echo 'Running ESLint...'
                         sh 'npm run lint || true'
-                        echo '✅ Lint complete.'
+                        echo 'Lint complete.'
                     }
                 }
 
                 stage('Test') {
                     steps {
-                        echo '🧪 Running Jest tests with coverage...'
+                        echo 'Running Jest tests with coverage...'
                         sh 'npm test'
-                        echo '✅ Tests passed.'
+                        echo 'Tests passed.'
                     }
                 }
 
@@ -75,7 +75,7 @@ pipeline {
         // ---------------------------------------------------------
         stage('SonarQube Analysis') {
             steps {
-                echo '📊 Running SonarQube analysis...'
+                echo 'Running SonarQube analysis...'
                 withSonarQubeEnv('SonarQube') {
                     sh '''
                         npx sonar-scanner \
@@ -86,7 +86,7 @@ pipeline {
                           -Dsonar.exclusions=node_modules/**,coverage/**
                     '''
                 }
-                echo '✅ SonarQube analysis submitted.'
+                echo 'SonarQube analysis submitted.'
             }
         }
 
@@ -95,11 +95,11 @@ pipeline {
         // ---------------------------------------------------------
         stage('Quality Gate') {
             steps {
-                echo '⏳ Waiting for SonarQube Quality Gate...'
+                echo 'Waiting for SonarQube Quality Gate...'
                 timeout(time: 5, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
-                echo '✅ Quality Gate PASSED!'
+                echo 'Quality Gate PASSED!'
             }
         }
 
@@ -111,7 +111,7 @@ pipeline {
     post {
 
         always {
-            echo '🧹 Cleaning workspace...'
+            echo 'Cleaning workspace...'
             // cleanWs() wrapped in node block to avoid context error
             node('') {
                 cleanWs()
@@ -119,15 +119,15 @@ pipeline {
         }
 
         success {
-            echo '🎉 Pipeline completed SUCCESSFULLY!'
+            echo 'Pipeline completed SUCCESSFULLY!'
         }
 
         failure {
-            echo '❌ Pipeline FAILED. Check logs above.'
+            echo 'Pipeline FAILED. Check logs above.'
         }
 
         unstable {
-            echo '⚠️ Pipeline is UNSTABLE.'
+            echo 'Pipeline is UNSTABLE.'
         }
 
     }
