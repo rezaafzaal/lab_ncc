@@ -116,7 +116,7 @@ npm start
 
 ---
 
-## 🔗 Endpoint Aplikasi
+## Endpoint Aplikasi
 
 | Method | Endpoint       | Deskripsi             |
 | ------ | -------------- | --------------------- |
@@ -126,7 +126,7 @@ npm start
 
 ---
 
-## 📝 Konfigurasi Jenkins
+## Konfigurasi Jenkins
 
 1. **Plugin yang diperlukan:** SonarQube Scanner, Pipeline, Git, Embeddable Build Status, Workspace Cleanup
 2. **Credentials:** Token SonarQube disimpan sebagai `Secret Text` dengan ID `sonarqube-token`
@@ -135,6 +135,3 @@ npm start
 
 ---
 
-## 👤 Author
-
-**Reza Afzaal Faizullah Taqy**
