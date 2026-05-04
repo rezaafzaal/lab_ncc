@@ -1,5 +1,3 @@
-tes webhook lagi
-
 # CI/CD Pipeline dengan Jenkins & SonarQube
 
 [![Build Status](https://problem-citation-renewably.ngrok-free.dev/buildStatus/icon?job=ncc)](https://problem-citation-renewably.ngrok-free.dev/job/ncc)
@@ -76,7 +74,6 @@ Di akhir proses, Jenkins membersihkan workspace agar tidak ada file sisa dari bu
 
 <img width="1819" height="822" alt="image" src="https://github.com/user-attachments/assets/7cdcc963-f351-4ae5-b4df-99bb995b2f99" />
 
-
 Hasil analisis SonarQube menunjukkan Quality Gate Passed dengan Security, Reliability, dan Maintainability grade A. Coverage mencapai 89.3% dari total 22 lines yang dianalisis.
 
 ---
@@ -134,4 +131,3 @@ npm start
 4. **Webhook SonarQube → Jenkins:** `http://172.20.0.2:8080/sonarqube-webhook/`
 
 ---
-
