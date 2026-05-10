@@ -119,39 +119,6 @@ Sistem monitoring yang dibangun mampu:
 
 ---
 
-## Alur Monitoring
-
-```
-Node Exporter (VM 1 & VM 2)
-    │
-    │  expose system metrics di port 9100
-    │  (CPU, memory, disk, network)
-    ▼
-Prometheus (prometheus-service)
-    │
-    │  scrape metrics setiap 15 detik
-    │  melalui private IP Azure Virtual Network
-    │
-    ▼
-Grafana (grafana-server)
-    │
-    │  query data dari Prometheus
-    │  dan menampilkan visualisasi dashboard
-    ▼
-Alertmanager
-    │
-    │  menerima alert dari Prometheus
-    │  berdasarkan threshold monitoring
-    ▼
-Gmail SMTP
-    │
-    │  mengirim notifikasi alert
-    │  melalui email
-    ▼
-Email Notification
-```
-
----
 
 ## Konfigurasi Prometheus
 
