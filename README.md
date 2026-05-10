@@ -70,16 +70,17 @@ Sistem monitoring yang dibangun mampu:
 ### Diagram Arsitektur
 
 ```text
-┌──────────────────────┐           ┌──────────────────────┐
-│ VM 1 - prometheus    │           │ VM 2 - grafana       │
-│ Private IP: 10.0.0.4 │           │ Private IP: 10.0.0.5 │
-├──────────────────────┤           ├──────────────────────┤
-│ Prometheus :9090     │◄──────────│ Grafana :3000        │
-│ Alertmanager :9093   │  query    │                      │
-│ Node Exporter :9100  │           │ Node Exporter :9100  │
-└──────────┬───────────┘           └──────────┬───────────┘
-           │ scrape metrics                   │
-           └──────────────────────────────────┘
+┌─────────────────────────┐              ┌─────────────────────────┐
+│ VM 1 - prometheus       │              │ VM 2 - grafana          │
+│ Private IP: 10.0.0.4    │              │ Private IP: 10.0.0.5    │
+│ Public IP: 20.2.233.227 │              │ Public IP: 20.2.140.186 │
+├─────────────────────────┤              ├──────────────────────┤
+│ Prometheus :9090        │◄─────────────│ Grafana :3000        │
+│ Alertmanager :9093      │  query       │                      │
+│ Node Exporter :9100     │              │ Node Exporter :9100  │
+└──────────┬──────────────┘              └──────────┬───────────┘
+           │ scrape metrics                         │
+           └────────────────────────────────────────┘
 
                     Private Network
 ```
@@ -106,7 +107,7 @@ alerting:
   alertmanagers:
     - static_configs:
         - targets:
-            - 'localhost:9093'  # Alertmanager berjalan di VM yang sama
+            - 'localhost:9093'  
 
 # File alert rules
 rule_files:
@@ -426,7 +427,7 @@ groups:
 
       - alert: HighMemoryUsage
         expr: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 > 85
-        for: 10ms
+        for: 10s
         labels:
           severity: warning
         annotations:
