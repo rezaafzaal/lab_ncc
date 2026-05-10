@@ -546,7 +546,7 @@ stress --vm 2 --vm-bytes 3000M --vm-keep --timeout 600 &
 ```
 ---
 
-## 🧪 Stress Test & Pengujian Alerting
+## Stress Test & Pengujian Alerting
 Pengujian dilakukan untuk memastikan alert Prometheus berjalan dengan baik dan notifikasi email berhasil terkirim melalui Alertmanager.
 ---
 
