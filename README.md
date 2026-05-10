@@ -435,7 +435,7 @@ groups:
           description: 'Memory usage {{ $value | humanizePercentage }}'
 
       - alert: HighDiskUsage
-        expr: (1 - node_filesystem_avail_bytes{fstype!='tmpfs'} / node_filesystem_size_bytes{fstype!='tmpfs'}) * 100 > 15
+        expr: (1 - node_filesystem_avail_bytes{fstype!='tmpfs'} / node_filesystem_size_bytes{fstype!='tmpfs'}) * 100 > 85
         for: 10s
         labels:
           severity: warning
